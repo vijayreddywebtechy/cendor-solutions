@@ -16,14 +16,14 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative max-w-[1600px] mx-auto px-8 lg:px-16 py-32 lg:py-40">
+      <div className="relative max-w-[1600px] mx-auto px-8 lg:px-16 py-28 md:py-32 lg:py-40">
         <div className="max-w-5xl">
           <div className="mb-12">
             <AnimateIn animationClass="animate-fade-in" delay="animation-delay-100">
               <div className="w-16 h-px bg-gold mb-12" />
             </AnimateIn>
             <AnimateIn delay="animation-delay-200">
-              <h1 className="font-bodoni text-6xl lg:text-8xl text-ivory mb-8 leading-[0.95] tracking-tight font-bold">
+              <h1 className="font-bodoni text-5xl md:text-6xl lg:text-8xl text-ivory mb-8 lg:leading-[0.95] tracking-tight font-bold">
                 Salesforce delivery built for business outcomes
               </h1>
             </AnimateIn>

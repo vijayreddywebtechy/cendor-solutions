@@ -126,7 +126,7 @@ function ContactSection({}: Props) {
           </div>
 
           <AnimateIn className="lg:col-span-1" delay="animation-delay-300">
-            <div className="bg-charcoal p-12 sticky top-32">
+            <div className="bg-charcoal p-10 lg:p-12 sticky top-32">
               <h3 className="font-serif text-2xl text-ivory mb-10">
                 Contact Information
               </h3>

@@ -1,4 +1,3 @@
-import Footer from "@/components/Footer";
 import PageHero from "@/components/common/PageHero";
 import ServicesList from "@/components/ServicesList";
 import DeliveryApproach from "@/components/DeliveryApproach";
@@ -19,7 +18,6 @@ export default function ServicesPage() {
         <DeliveryApproach />
         <ContactCendor />
       </main>
-      <Footer />
     </>
   );
 }

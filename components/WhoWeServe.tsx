@@ -57,7 +57,7 @@ const WhoWeServe = ({
             {...cardGrid}
           />
         )}
-        <AnimateIn className={twMerge("bg-charcoal p-12 lg:p-16", fitSectionClassName)}>
+        <AnimateIn className={twMerge("bg-charcoal p-10 md:p-12 lg:p-16", fitSectionClassName)}>
           <h3 className="font-bodoni text-3xl text-ivory font-bold mb-8">
             You're a strong fit if you are:
           </h3>

@@ -32,7 +32,7 @@ function PageHero({
           <AnimateIn delay="animation-delay-200">
             <h1
               className={twMerge(
-                "font-bodoni font-bold text-6xl lg:text-8xl text-ivory mb-8 leading-[0.95]",
+                "font-bodoni font-bold text-5xl md:text-6xl lg:text-8xl text-ivory mb-8 leading-[0.95]",
                 headingClassName
               )}
             >

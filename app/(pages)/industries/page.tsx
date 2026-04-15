@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/common/PageHero";
 import IndustriesList from "@/components/IndustriesList";
@@ -25,7 +24,6 @@ export default function IndustriesPage() {
           href="/contact"
         />
       </main>
-      <Footer />
     </>
   );
 }

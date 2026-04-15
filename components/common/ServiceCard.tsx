@@ -12,7 +12,7 @@ type Props = {
 };
 
 const defaults = {
-  cardClassName: "bg-charcoal p-12 group hover:bg-graphite transition-all duration-500",
+  cardClassName: "h-full bg-charcoal p-10 lg:p-12 group hover:bg-graphite transition-all duration-500",
   numberClassName: "text-xs text-gold tracking-widest uppercase",
   titleClassName: "font-bodoni text-2xl text-ivory mb-4 leading-tight font-bold",
   descriptionClassName: "text-stone leading-relaxed font-light",

@@ -193,7 +193,7 @@ function ServiceBlock({ service }: Props) {
 
       {/* RIGHT */}
       <div className="lg:col-span-7">
-        <div className="bg-charcoal p-12">
+        <div className="bg-charcoal p-10 lg:p-12">
           <h3 className="font-bodoni text-xs font-medium text-gold mb-8 uppercase tracking-widest">
             Capabilities
           </h3>

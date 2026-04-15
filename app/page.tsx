@@ -21,7 +21,6 @@ export default function Home() {
         <EngagementModels />
         <CallToActionSection />
       </main>
-      <Footer />
     </>
   );
 }

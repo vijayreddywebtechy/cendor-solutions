@@ -16,8 +16,8 @@ const defaults = {
   className: "max-w-4xl mx-auto text-center",
   dividerClassName: "w-12 h-px bg-gold mb-12",
   dividerAlign: "mx-auto",
-  headingClassName: "font-bodoni text-5xl lg:text-6xl text-ivory mb-8 lg:leading-tight font-bold",
-  paragraphClassName: "text-xl text-stone leading-relaxed font-light",
+  headingClassName: "font-bodoni text-4xl md:text-5xl lg:text-6xl text-ivory mb-8 lg:leading-tight font-bold",
+  paragraphClassName: "text-lg md:text-xl text-stone leading-relaxed font-light",
 };
 
 function SectionIntro({

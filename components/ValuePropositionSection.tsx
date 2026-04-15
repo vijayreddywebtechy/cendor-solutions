@@ -7,6 +7,8 @@ function ValuePropositionSection() {
         <SectionIntro
           heading="Practical Salesforce transformation for growing and enterprise organisations"
           paragraph="Cendor Solutions helps mid-market and enterprise customers implement, optimise, and support Salesforce with unwavering focus on business outcomes, technical excellence, and long-term scalability."
+          className="max-w-4xl"
+          headingClassName="tracking-tight"
         />
       </div>
     </section>

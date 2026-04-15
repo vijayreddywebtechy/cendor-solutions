@@ -2,32 +2,96 @@
 import { useState } from "react";
 import AnimateIn from "@/components/common/AnimateIn";
 
+// ─── Google Form config ────────────────────────────────────────────────────────
+// 1. Create a Google Form with 5 Short Answer questions (Name, Email, Company,
+//    Phone, Tell us about your needs).
+// 2. Go to ⋮ → "Get pre-filled link", fill dummy values, copy the URL.
+// 3. Replace the FORM_ID and entry.XXXXXXXXX values below with your own.
+const GOOGLE_FORM_ACTION =
+  "https://docs.google.com/forms/d/e/1FAIpQLSenWa15iFYQ4dIX7Bwtb4-znUg-MM4_7ITb8u70zyIkOxFe6w/formResponse";
+
+const ENTRY = {
+  name:    "entry.190890141",
+  email:   "entry.978861769",
+  company: "entry.1934593042",
+  phone:   "entry.482496536",
+  message: "entry.450358586",
+};
+// ──────────────────────────────────────────────────────────────────────────────
+
 type Props = {};
 
+type Errors = Partial<Record<keyof typeof INITIAL_DATA, string>>;
+
+const INITIAL_DATA = { name: "", email: "", company: "", phone: "", message: "" };
+
+function validate(data: typeof INITIAL_DATA): Errors {
+  const errors: Errors = {};
+  if (!data.name.trim()) errors.name = "Name is required.";
+  if (!data.email.trim()) {
+    errors.email = "Email is required.";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+    errors.email = "Enter a valid email address.";
+  }
+  if (!data.company.trim()) errors.company = "Company is required.";
+  if (data.phone && !/^\d{10}$/.test(data.phone))
+    errors.phone = "Phone must be exactly 10 digits.";
+  if (!data.message.trim()) errors.message = "Please tell us about your needs.";
+  return errors;
+}
+
 function ContactSection({}: Props) {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    phone: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState(INITIAL_DATA);
+  const [errors, setErrors] = useState<Errors>({});
+  const [touched, setTouched] = useState<Partial<Record<keyof typeof INITIAL_DATA, boolean>>>({});
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    // Phone: strip non-numeric characters as the user types
+    const sanitized = name === "phone" ? value.replace(/\D/g, "").slice(0, 10) : value;
+    const updated = { ...formData, [name]: sanitized };
+    setFormData(updated);
+    if (touched[name as keyof typeof INITIAL_DATA]) {
+      setErrors(validate(updated));
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const name = e.target.name as keyof typeof INITIAL_DATA;
+    setTouched((t) => ({ ...t, [name]: true }));
+    setErrors(validate(formData));
+  };
+
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const allTouched = Object.fromEntries(
+      Object.keys(INITIAL_DATA).map((k) => [k, true])
+    ) as Record<keyof typeof INITIAL_DATA, boolean>;
+    setTouched(allTouched);
+    const errs = validate(formData);
+    setErrors(errs);
+    if (Object.keys(errs).length > 0) return;
+    setStatus("submitting");
 
-    console.log("Form Data:", formData);
+    const body = new FormData();
+    body.append(ENTRY.name,    formData.name);
+    body.append(ENTRY.email,   formData.email);
+    body.append(ENTRY.company, formData.company);
+    body.append(ENTRY.phone,   formData.phone);
+    body.append(ENTRY.message, formData.message);
 
-    // 👉 integrate API here later
+    try {
+      // Google Forms doesn't support CORS — no-cors means we can't read the
+      // response, but the submission still lands in your Google Sheet.
+      await fetch(GOOGLE_FORM_ACTION, { method: "POST", body, mode: "no-cors" });
+      setStatus("success");
+      setFormData({ name: "", email: "", company: "", phone: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -114,12 +178,25 @@ function ContactSection({}: Props) {
                 />
               </div>
 
+              {/* Feedback */}
+              {status === "success" && (
+                <p className="text-sm text-gold tracking-wide">
+                  Thank you — we'll be in touch within one business day.
+                </p>
+              )}
+              {status === "error" && (
+                <p className="text-sm text-red-400 tracking-wide">
+                  Something went wrong. Please try again or email us directly.
+                </p>
+              )}
+
               {/* Button */}
               <button
                 type="submit"
-                className="bg-gold text-obsidian px-12 py-5 hover:bg-gold-dark transition-all duration-300 text-sm tracking-widest uppercase !mt-16"
+                disabled={status === "submitting"}
+                className="bg-gold text-obsidian px-12 py-5 hover:bg-gold-dark transition-all duration-300 text-sm tracking-widest uppercase !mt-16 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {status === "submitting" ? "Sending..." : "Send Message"}
               </button>
             </form>
             </AnimateIn>

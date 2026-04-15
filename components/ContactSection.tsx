@@ -41,7 +41,7 @@ function ContactSection({}: Props) {
             </AnimateIn>
 
             <AnimateIn delay="animation-delay-200">
-              <h2 className="font-serif text-4xl lg:text-5xl text-ivory mb-6">
+              <h2 className="font-bodoni text-4xl lg:text-5xl text-ivory mb-6">
                 Book a Discovery Conversation
               </h2>
             </AnimateIn>
@@ -127,7 +127,7 @@ function ContactSection({}: Props) {
 
           <AnimateIn className="lg:col-span-1" delay="animation-delay-300">
             <div className="bg-charcoal p-10 lg:p-12 sticky top-32">
-              <h3 className="font-serif text-2xl text-ivory mb-10">
+              <h3 className="font-bodoni text-2xl text-ivory mb-10">
                 Contact Information
               </h3>
               <div className="space-y-10">

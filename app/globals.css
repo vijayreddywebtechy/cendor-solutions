@@ -88,6 +88,11 @@ a {
   text-decoration: none;
 }
 
+.font-bodoni,
+h1, h2, h3 {
+  font-optical-sizing: auto;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

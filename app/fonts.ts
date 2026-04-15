@@ -2,7 +2,8 @@ import { Bodoni_Moda, Manrope } from 'next/font/google'
 
 export const bodoniModa = Bodoni_Moda({
   subsets: ['latin'],
-  weight: ["400", "600", "700", "800", "900"],
+  axes: ['opsz'],
+  style: ['normal', 'italic'],
   variable: '--font-bodoni',
   display: 'swap',
 })

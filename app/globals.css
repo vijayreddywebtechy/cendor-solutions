@@ -1,13 +1,60 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+
+:root {
+
+  /* Brand Base (HSL values) */
+  --obsidian: 0 0% 4%;
+  --charcoal: 0 0% 8%;
+  --graphite: 0 0% 14%;
+  --ivory: 40 30% 93%;
+  --stone: 30 15% 80%;
+  --gold: 40 45% 60%;
+  --gold-dark: 38 40% 48%;
+
+  /* Semantic Tokens (used by shadcn) */
+  --background: var(--obsidian);
+  --foreground: var(--ivory);
+
+  --card: var(--charcoal);
+  --card-foreground: var(--ivory);
+
+  --popover: var(--charcoal);
+  --popover-foreground: var(--ivory);
+
+  /* 🔥 IMPORTANT CHANGE HERE */
+  --primary: var(--gold);
+  --primary-foreground: var(--obsidian);
+
+  --secondary: var(--graphite);
+  --secondary-foreground: var(--ivory);
+
+  --muted: var(--charcoal);
+  --muted-foreground: var(--stone);
+
+  --accent: var(--gold-dark);
+  --accent-foreground: var(--ivory);
+
+  --destructive: 0 72% 45%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 40 30% 93% / 0.1;
+  --input: 0 0% 0% / 0;
+  --ring: var(--gold);
+
+  --radius: 0.5rem;
+
+  /* Sidebar */
+  --sidebar: var(--charcoal);
+  --sidebar-foreground: var(--ivory);
+  --sidebar-primary: var(--gold);
+  --sidebar-primary-foreground: var(--obsidian);
+  --sidebar-accent: var(--graphite);
+  --sidebar-accent-foreground: var(--ivory);
+  --sidebar-border: 40 30% 93% / 0.1;
+  --sidebar-ring: var(--gold);
 }
 
 html {
@@ -26,7 +73,6 @@ body {
   flex-direction: column;
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -46,4 +92,45 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+/* ── Scroll / entrance animations ── */
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease both;
+}
+
+/* delay helpers */
+.animation-delay-100 { animation-delay: 100ms; }
+.animation-delay-200 { animation-delay: 200ms; }
+.animation-delay-300 { animation-delay: 300ms; }
+.animation-delay-400 { animation-delay: 400ms; }
+.animation-delay-500 { animation-delay: 500ms; }
+.animation-delay-600 { animation-delay: 600ms; }
+.animation-delay-700 { animation-delay: 700ms; }
+.animation-delay-800 { animation-delay: 800ms; }
+
+/* pre-animate state (hidden before intersection fires) */
+.pre-animate {
+  opacity: 0;
 }
